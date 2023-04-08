@@ -186,6 +186,8 @@ class YOLOV7_OPENVINO(object):
         
         else:        
             people = 0
+            laptops = 0
+            cellphones = 0
             for xyxy, conf, cls in boxinfo:
                 conf = round(conf,5)
                      
@@ -196,9 +198,27 @@ class YOLOV7_OPENVINO(object):
                                         color=self.colors[int(cls)], 
                                         line_thickness=2)
                     people += 1
+                    
+                elif cls == 63: # for IoT only box laptops
+                    self.plot_one_box(xyxy, 
+                                        img, 
+                                        label=self.classes[int(cls)], 
+                                        color=self.colors[int(cls)], 
+                                        line_thickness=2)
+                    laptops += 1
+                    
+                elif cls == 68: # for IoT only box cellphones
+                    self.plot_one_box(xyxy, 
+                                        img, 
+                                        label=self.classes[int(cls)], 
+                                        color=self.colors[int(cls)], 
+                                        line_thickness=2)
+                    cellphones += 1
   
             # web app for IoT
             self.routes.net_people_count = people
+            self.routes.net_laptop_count = laptops
+            self.routes.net_cellphone_count = cellphones
             self.routes.framecopy = img
 
             

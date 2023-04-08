@@ -35,6 +35,8 @@ class WebAppUtils:
     def __init__(self):
         self.framecopy = None
         self.net_people_count = None
+        self.net_laptop_count = None
+        self.net_cellphone_count = None
         self.current_fps = None
     
     def favicon(self):
@@ -54,7 +56,12 @@ class WebAppUtils:
 
     def get_people(self):
         if self.net_people_count != None:
-            return jsonify(self.net_people_count)
+            data = {
+                "people":self.net_people_count,
+                "laptops":self.net_laptop_count,
+                "cellphones":self.net_cellphone_count
+            }
+            return data
         else:
             return jsonify("server error"),500
 
