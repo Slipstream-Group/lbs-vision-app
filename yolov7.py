@@ -188,7 +188,9 @@ class YOLOV7_OPENVINO(object):
             people = 0
             laptops = 0
             cellphones = 0
+            
             for xyxy, conf, cls in boxinfo:
+                print("CLASS IS: ",cls)
                 conf = round(conf,5)
                      
                 if cls == 0: # for IoT only box people
@@ -207,7 +209,7 @@ class YOLOV7_OPENVINO(object):
                                         line_thickness=2)
                     laptops += 1
                     
-                elif cls == 68: # for IoT only box cellphones
+                elif cls == 67: # for IoT only box cellphones
                     self.plot_one_box(xyxy, 
                                         img, 
                                         label=self.classes[int(cls)], 
